@@ -38,16 +38,34 @@ from pcluster.constants import SUPPORTED_OSES_FOR_ARCHITECTURE, SUPPORTED_OSES_F
 
 LOGGER = logging.getLogger(__name__)
 
+REGION_PARTITION_MAP = {
+    "us-gov": "aws-us-gov",
+    "cn": "aws-cn",
+    "us-iso-": "aws-iso",
+    "us-isob": "aws-iso-b",
+}
+
 
 def get_partition():
     """Get partition for the region set in the environment."""
-    return next(("aws-" + partition for partition in ["us-gov", "cn"] if get_region().startswith(partition)), "aws")
+    return next(
+        (
+            REGION_PARTITION_MAP[partition]
+            for partition in REGION_PARTITION_MAP.keys()
+            if get_region().startswith(partition)
+        ),
+        "aws",
+    )
 
 
 def get_url_domain_suffix():
     """Get domain suffix."""
     if get_partition() == "aws-cn":
         return "amazonaws.com.cn"
+    if get_partition() == "aws-iso":
+        return "c2s.ic.gov"
+    if get_partition() == "aws-iso-b":
+        return "sc2s.sgov.gov"
     else:
         return "amazonaws.com"
 

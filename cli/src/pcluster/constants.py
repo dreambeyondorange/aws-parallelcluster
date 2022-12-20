@@ -180,6 +180,9 @@ SUPPORTED_REGIONS = [
     "us-gov-west-1",
     "us-west-1",
     "us-west-2",
+    "us-iso-east-1",
+    "us-iso-west-1",
+    "us-isob-east-1",
 ]
 
 SCHEDULER_PLUGIN_MAX_NUMBER_OF_USERS = 10
