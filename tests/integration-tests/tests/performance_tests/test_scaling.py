@@ -8,7 +8,7 @@ from tests.common.assertions import assert_no_msg_in_logs
 
 @pytest.mark.parametrize(
     "max_nodes",
-    [1000],
+    [2000],
 )
 def test_scaling(
     vpc_stack,
